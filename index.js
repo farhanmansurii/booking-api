@@ -12,10 +12,10 @@ app.use(
 app.use(express.json())
 
 mongoose.connect(process.env.MONGO_URL).then(() => {
-  console.log("connected to DB");
+  console.log("connected to database :)");
 });
 
 app.get("/", (req, res) => {
-  res.send("Hi , Welcome to the Hotel API");
+  res.send({message :"Hello , Welcome to the Hotel booking API" });
 });
-app.listen(3000, () => console.log("listening on port 5000"));
+app.listen(3000, () => console.log(`listening on port ${3000}`));
