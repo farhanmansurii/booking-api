@@ -9,7 +9,7 @@ app.use(
     origin: "*",
   })
 );
-app.use(express.json());app.listen(5000, () => console.log("listening on port 5000"));
+app.use(express.json())
 
 mongoose.connect(process.env.MONGODB).then(()=>console.log("Database is connected"))
 
