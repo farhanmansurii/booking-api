@@ -2,7 +2,7 @@ const express = require('express')
 const mongoose = require('mongoose')
 const cors = require('cors')
 const app = express()
-
+const path = require('path')
 require('dotenv').config()
 app.use(
   cors({
@@ -16,6 +16,6 @@ mongoose.connect(process.env.MONGO_URL).then(() => {
 });
 
 app.get("/", (req, res) => {
-  res.send({message :"Hello , Welcome to the Hotel booking API" });
+  res.sendFile(path.join(__dirname+'/routes/index.html'));
 });
 app.listen(3000, () => console.log(`listening on port ${3000}`));
