@@ -13,9 +13,7 @@ app.use(cors({
   origin: '*'
 }));
 
-app.listen(process.env.PORT,()=>{
-  console.log(`${process.env.PORT} is listening `)
-})
+
 mongoose.connect(process.env.MONGODB).then(()=>console.log("Database is connected"))
 
 app.use("/",(req,res)=>{
