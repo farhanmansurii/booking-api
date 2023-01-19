@@ -11,7 +11,9 @@ app.use(
 );
 app.use(express.json())
 
-
+mongoose.connect(process.env.MONGO_URL).then(() => {
+  console.log("connected to DB");
+});
 
 app.get("/", (req, res) => {
   res.send("Hi , Welcome to the Hotel API");
