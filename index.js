@@ -11,7 +11,6 @@ app.use(
 );
 app.use(express.json())
 
-mongoose.connect(process.env.MONGODB).then(()=>console.log("Database is connected"))
 
 
 app.get("/", (req, res) => {
