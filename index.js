@@ -20,6 +20,25 @@ mongoose.connect(process.env.MONGO_URL).then(() => {
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname+'/routes/index.html'));
 });
+app.post('/login',(req,res)=>{
+  Register.findOne({ email: req.body.email })
+    .then(user => {
+      if (!user) {
+        return res.status(404).json({ message: "User not found" });
+      }
+      bcrypt.compare(req.body.password, user.password)
+        .then(isMatch => {
+          if (isMatch) {
+            return res.json({ message: "Success" });
+          } else {
+            return res.status(400).json({ message: "Incorrect password" });
+          }
+        });
+    })
+    .catch(err => {
+      res.status(500).json({ error: err });
+    });
+})
 app.post("/register", (req,res)=>{
   const newUser = new Register({
     username: req.body.username,
@@ -33,7 +52,7 @@ app.post("/register", (req,res)=>{
       newUser.password = hash;
       newUser.save()
       .then(user => {
-        res.json({ message: "User created successfully!" });
+        res.json({ message: `${newUser.username} created successfully` });
       })
       .catch(err => {
         res.status(500).json({ error: err });
