@@ -4,6 +4,7 @@ const cors = require('cors')
 const app = express()
 const bcrypt = require('bcrypt')
 const path = require('path')
+const restaurantRouter = require('./controllers/Restaurant');
 const Register = require('./models/Register')
 require('dotenv').config()
 app.use(
@@ -12,7 +13,7 @@ app.use(
   })
 );
 app.use(express.json())
-
+app.use('/restaurant', restaurantRouter);
 mongoose.connect(process.env.MONGO_URL).then(() => {
   console.log("connected to database :)");
 });
